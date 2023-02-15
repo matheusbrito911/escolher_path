@@ -1,0 +1,25 @@
+import os
+import os.path as osp
+import PySimpleGUI as sg
+import pandas as pd 
+#Parte Gráfica
+
+sg.theme('DarkBlack')
+layout = [  [sg.Text('Upload de Dados Expansão + Performance')],
+            [sg.Text('Selecione o caminho do arquivo:'),sg.Input(), sg.FileBrowse(key="path")],
+            [sg.Button('Submit'),sg.Cancel()]
+]
+
+window = sg.Window('Upload de dados manual', layout, size = (700,200))
+
+while True:
+    event, values = window.read()
+    if event == sg.WIN_CLOSED or event=="Exit" or event == "Cancel":
+        break
+    elif event == "Submit":
+        path = values["path"]
+        window.close()
+
+df = pd.read_excel(path)
+
+
